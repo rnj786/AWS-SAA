@@ -1,0 +1,108 @@
+# Setting Up AWS CLI for Beginners
+
+## Prerequisites
+1. **AWS Account**: Ensure you have an active AWS account. If not, sign up at [AWS Signup](https://aws.amazon.com/).
+2. **AWS CLI**: Download and install the AWS Command Line Interface (CLI) from [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
+3. **Text Editor**: Use any text editor (e.g., VS Code, Notepad++) to edit configuration files if needed.
+4. **Terminal/Command Prompt**: Ensure you have access to a terminal (Linux/Mac) or Command Prompt (Windows).
+
+## Steps to Set Up AWS CLI
+
+### 1. Install AWS CLI
+Follow the instructions for your operating system from the [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
+
+### Installing AWS CLI from the Command Line
+
+#### On Linux
+Run the following commands:
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+Verify the installation:
+```bash
+aws --version
+```
+
+#### On macOS
+Run the following commands:
+```bash
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+```
+Verify the installation:
+```bash
+aws --version
+```
+
+#### On Windows
+Run the following commands in PowerShell:
+```powershell
+Invoke-WebRequest -Uri "https://awscli.amazonaws.com/AWSCLIV2.msi" -OutFile "AWSCLIV2.msi"
+Start-Process msiexec.exe -ArgumentList "/i AWSCLIV2.msi /quiet" -Wait
+```
+Verify the installation:
+```powershell
+aws --version
+```
+
+### 2. Verify Installation
+Run the following command to verify the installation:
+```bash
+aws --version
+```
+You should see the version of AWS CLI installed.
+
+### 3. Configure AWS CLI
+Run the following command to configure AWS CLI:
+```bash
+aws configure
+```
+You will be prompted to enter:
+- **AWS Access Key ID**: Obtain this from the AWS Management Console under IAM > Users > Security Credentials.
+- **AWS Secret Access Key**: Obtain this along with the Access Key ID.
+- **Default region**: Specify the region (e.g., `us-east-1`).
+- **Default output format**: Choose `json`, `text`, or `table`.
+
+### 4. Test Configuration
+Run a simple command to test the configuration:
+```bash
+aws s3 ls
+```
+This will list all S3 buckets in your account. If you see an error, double-check your credentials and region.
+
+## First Few AWS CLI Commands
+
+### 1. List All S3 Buckets
+```bash
+aws s3 ls
+```
+
+### 2. Create a New S3 Bucket
+```bash
+aws s3 mb s3://your-bucket-name
+```
+Replace `your-bucket-name` with a unique bucket name.
+
+### 3. Upload a File to S3
+```bash
+aws s3 cp /path/to/your/file s3://your-bucket-name
+```
+Replace `/path/to/your/file` with the file path and `your-bucket-name` with your bucket name.
+
+### 4. Download a File from S3
+```bash
+aws s3 cp s3://your-bucket-name/your-file /path/to/destination
+```
+Replace `your-file` and `/path/to/destination` accordingly.
+
+### 5. Describe EC2 Instances
+```bash
+aws ec2 describe-instances
+```
+This will list all EC2 instances in your account.
+
+## Additional Resources
+- [AWS CLI Documentation](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html)
+- [AWS Free Tier](https://aws.amazon.com/free/): Explore AWS services for free.

@@ -1,0 +1,122 @@
+# Setting Up Terraform After Installing AWS CLI
+
+## Prerequisites
+1. **AWS CLI Installed**: Ensure AWS CLI is installed and configured on your system.
+2. **Terraform**: Download and install Terraform.
+
+## Installing Terraform on Linux
+Run the following commands to install Terraform:
+```bash
+# Download the Terraform binary
+curl -fsSL https://releases.hashicorp.com/terraform/1.5.0/terraform_1.5.0_linux_amd64.zip -o terraform.zip
+
+# Unzip the binary
+unzip terraform.zip
+
+# Move the binary to a directory in your PATH
+sudo mv terraform /usr/local/bin/
+
+# Verify the installation
+terraform --version
+```
+
+## Basics of Terraform
+Terraform is an Infrastructure as Code (IaC) tool that allows you to define and provision infrastructure using a declarative configuration language. It supports multiple cloud providers, including AWS.
+
+### Key Concepts
+- **Providers**: Plugins that interact with cloud providers (e.g., AWS).
+- **Resources**: Components of your infrastructure (e.g., EC2 instances, S3 buckets).
+- **State**: Terraform keeps track of your infrastructure in a state file.
+- **Plan**: A preview of changes Terraform will make.
+- **Apply**: Executes the changes to create or modify infrastructure.
+
+## Sample Terraform File to Launch a Basic EC2 Instance
+
+Create a file named `main.tf` with the following content:
+```hcl
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-0c55b159cbfafe1f0" # Replace with a valid AMI ID for your region
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "ExampleInstance"
+  }
+}
+```
+
+### Steps to Use Terraform
+1. **Initialize Terraform**
+   Run the following command to initialize Terraform:
+   ```bash
+   terraform init
+   ```
+
+2. **Validate the Configuration**
+   Run the following command to validate the configuration:
+   ```bash
+   terraform validate
+   ```
+
+3. **Preview Changes**
+   Run the following command to preview the changes:
+   ```bash
+   terraform plan
+   ```
+
+4. **Apply Changes**
+   Run the following command to apply the changes and create the EC2 instance:
+   ```bash
+   terraform apply
+   ```
+   Confirm the prompt to proceed.
+
+5. **Destroy Resources**
+   To clean up and destroy the resources, run:
+   ```bash
+   terraform destroy
+   ```
+
+### Creating a Shortcut for Terraform
+To use `tf` as a shortcut for `terraform`, add the following alias to your shell configuration file:
+
+#### For Bash
+1. Open your `.bashrc` file:
+   ```bash
+   nano ~/.bashrc
+   ```
+
+2. Add the following line at the end of the file:
+   ```bash
+   alias tf='terraform'
+   ```
+
+3. Save the file and reload the shell configuration:
+   ```bash
+   source ~/.bashrc
+   ```
+
+#### For Zsh
+1. Open your `.zshrc` file:
+   ```bash
+   nano ~/.zshrc
+   ```
+
+2. Add the following line at the end of the file:
+   ```bash
+   alias tf='terraform'
+   ```
+
+3. Save the file and reload the shell configuration:
+   ```bash
+   source ~/.zshrc
+   ```
+
+Now you can use `tf` instead of `terraform` in your terminal.
+
+## Additional Resources
+- [Terraform Documentation](https://www.terraform.io/docs/index.html)
+- [AWS Provider Documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
