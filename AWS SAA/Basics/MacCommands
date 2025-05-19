@@ -1,0 +1,241 @@
+
+This document provides a list of commonly used macOS terminal commands, their purpose, and examples to help beginners get started.
+
+---
+
+## 1. `ls` - List Directory Contents
+- **Summary**: Displays the contents of a directory.
+- **Example**:
+  ```bash
+  ls
+  ```
+  Lists files and folders in the current directory.
+
+  ```bash
+  ls -l
+  ```
+  Displays detailed information about each file (permissions, size, etc.).
+
+---
+
+## 2. `cd` - Change Directory
+- **Summary**: Navigates between directories.
+- **Example**:
+  ```bash
+  cd Documents
+  ```
+  Moves to the `Documents` directory.
+
+  ```bash
+  cd ..
+  ```
+  Moves up one directory level.
+
+---
+
+## 3. `pwd` - Print Working Directory
+- **Summary**: Displays the full path of the current directory.
+- **Example**:
+  ```bash
+  pwd
+  ```
+  Outputs something like `/Users/username/Documents`.
+
+---
+
+## 4. `mkdir` - Make Directory
+- **Summary**: Creates a new directory.
+- **Example**:
+  ```bash
+  mkdir NewFolder
+  ```
+  Creates a folder named `NewFolder` in the current directory.
+
+---
+
+## 5. `touch` - Create a New File
+- **Summary**: Creates an empty file.
+- **Example**:
+  ```bash
+  touch file.txt
+  ```
+  Creates a file named `file.txt` in the current directory.
+
+---
+
+## 6. `rm` - Remove Files or Directories
+- **Summary**: Deletes files or directories.
+- **Example**:
+  ```bash
+  rm file.txt
+  ```
+  Deletes `file.txt`.
+
+  ```bash
+  rm -r folder
+  ```
+  Deletes a folder and its contents.
+
+---
+
+## 7. `cp` - Copy Files or Directories
+- **Summary**: Copies files or directories.
+- **Example**:
+  ```bash
+  cp file.txt backup.txt
+  ```
+  Copies `file.txt` to `backup.txt`.
+
+  ```bash
+  cp -r folder backup_folder
+  ```
+  Copies the entire `folder` to `backup_folder`.
+
+---
+
+## 8. `mv` - Move or Rename Files
+- **Summary**: Moves or renames files and directories.
+- **Example**:
+  ```bash
+  mv file.txt newfile.txt
+  ```
+  Renames `file.txt` to `newfile.txt`.
+
+  ```bash
+  mv file.txt /path/to/destination/
+  ```
+  Moves `file.txt` to the specified destination.
+
+---
+
+## 9. `cat` - View File Contents
+- **Summary**: Displays the contents of a file.
+- **Example**:
+  ```bash
+  cat file.txt
+  ```
+  Prints the contents of `file.txt` to the terminal.
+
+---
+
+## 10. `echo` - Print Text to Terminal or File
+- **Summary**: Outputs text to the terminal or writes it to a file.
+- **Example**:
+  ```bash
+  echo "Hello, World!"
+  ```
+  Prints `Hello, World!` to the terminal.
+
+  ```bash
+  echo "Hello, World!" > file.txt
+  ```
+  Writes `Hello, World!` to `file.txt`.
+
+---
+
+## 11. `open` - Open Files or Applications
+- **Summary**: Opens files, folders, or applications.
+- **Example**:
+  ```bash
+  open file.txt
+  ```
+  Opens `file.txt` in the default text editor.
+
+  ```bash
+  open .
+  ```
+  Opens the current directory in Finder.
+
+---
+
+## 12. `man` - Manual Pages
+- **Summary**: Displays the manual for a command.
+- **Example**:
+  ```bash
+  man ls
+  ```
+  Shows the manual for the `ls` command.
+
+---
+
+## 13. `whoami` - Display Current User
+- **Summary**: Prints the username of the current user.
+- **Example**:
+  ```bash
+  whoami
+  ```
+  Outputs the username of the logged-in user.
+
+---
+
+## 14. `top` - Monitor System Processes
+- **Summary**: Displays real-time information about system processes.
+- **Example**:
+  ```bash
+  top
+  ```
+  Shows CPU and memory usage for running processes.
+
+---
+
+## 15. `chmod` - Change File Permissions
+- **Summary**: Modifies file or directory permissions.
+- **Example**:
+  ```bash
+  chmod 755 script.sh
+  ```
+  Grants read, write, and execute permissions to the owner, and read and execute permissions to others.
+
+---
+
+## 16. `curl` - Transfer Data from URLs
+- **Summary**: Fetches data from a URL.
+- **Example**:
+  ```bash
+  curl https://example.com
+  ```
+  Fetches the content of `https://example.com`.
+
+---
+
+## 17. `grep` - Search Text in Files
+- **Summary**: Searches for a specific pattern in files.
+- **Example**:
+  ```bash
+  grep "pattern" file.txt
+  ```
+  Searches for `pattern` in `file.txt`.
+
+---
+
+## 18. `find` - Search for Files
+- **Summary**: Locates files or directories based on criteria.
+- **Example**:
+  ```bash
+  find . -name "*.txt"
+  ```
+  Finds all `.txt` files in the current directory and its subdirectories.
+
+---
+
+## 19. `df` - Disk Space Usage
+- **Summary**: Displays disk space usage for file systems.
+- **Example**:
+  ```bash
+  df -h
+  ```
+  Shows human-readable disk space usage.
+
+---
+
+## 20. `history` - Command History
+- **Summary**: Displays a list of previously executed commands.
+- **Example**:
+  ```bash
+  history
+  ```
+  Lists all commands executed in the current terminal session.
+
+---
+
+These commands are essential for navigating and managing files, directories, and processes on macOS. Practice using them to become comfortable with the terminal!

@@ -9,13 +9,13 @@ resource "aws_kms_key" "ebs_kms_key" {
   enable_key_rotation     = true
 }
 
-# Create a Key Pair
+// Create a Key Pair
 resource "aws_key_pair" "key_pair" {
   key_name   = var.key_name
   public_key = file(var.public_key_path)
 }
 
-# Create a Security Group
+// Create a Security Group
 resource "aws_security_group" "ec2_sg" {
   name        = var.security_group_name
   description = var.security_group_description
@@ -36,14 +36,14 @@ resource "aws_security_group" "ec2_sg" {
   }
 }
 
-# Create an EC2 Instance
+// Create an EC2 Instance
 resource "aws_instance" "ec2_instance" {
   ami           = var.ami_id
   instance_type = var.instance_type
   key_name      = aws_key_pair.key_pair.key_name
   subnet_id     = var.subnet_id
-  security_groups = [
-    aws_security_group.ec2_sg.name
+  vpc_security_group_ids = [
+    aws_security_group.ec2_sg.id
   ]
 
   tags = {
@@ -57,13 +57,4 @@ resource "aws_instance" "ec2_instance" {
     encrypted             = true
     kms_key_id            = aws_kms_key.ebs_kms_key.arn
   }
-}
-
-# Output the instance details
-output "instance_id" {
-  value = aws_instance.ec2_instance.id
-}
-
-output "public_ip" {
-  value = aws_instance.ec2_instance.public_ip
 }

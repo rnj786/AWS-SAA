@@ -1,0 +1,175 @@
+# Windows Commands for Beginners
+
+This document introduces some of the most frequently used Windows commands. These commands are executed in the Command Prompt (`cmd`) or PowerShell.
+
+---
+
+## 1. `ls`
+**Description**: Lists the contents of a directory (similar to `dir`).
+
+**Example**:
+```cmd
+ls
+```
+This will display all files and subdirectories in the current directory.
+
+---
+
+## 2. `cd`
+**Description**: Changes the current directory.
+
+**Examples**:
+- To move into a folder:
+  ```cmd
+  cd folder_name
+  ```
+- To go back to the parent directory:
+  ```cmd
+  cd ..
+  ```
+
+---
+
+## 3. `mkdir`
+**Description**: Creates a new directory.
+
+**Example**:
+```cmd
+mkdir new_folder
+```
+This will create a folder named `new_folder` in the current directory.
+
+---
+
+## 4. `rm`
+**Description**: Deletes files or directories.
+
+**Examples**:
+- To delete a file:
+  ```cmd
+  del file_name.txt
+  ```
+- To delete a folder:
+  ```cmd
+  rmdir folder_name
+  ```
+Note: The folder must be empty to delete it using `rmdir`.
+
+---
+
+## 5. `cp`
+**Description**: Copies files or directories.
+
+**Example**:
+```cmd
+copy source_file.txt destination_folder
+```
+This will copy `source_file.txt` to `destination_folder`.
+
+---
+
+## 6. `mv`
+**Description**: Moves or renames files and directories.
+
+**Example**:
+```cmd
+move file_name.txt destination_folder
+```
+This will move `file_name.txt` to `destination_folder`.
+
+---
+
+## 7. `clear`
+**Description**: Clears the Command Prompt screen (similar to `cls`).
+
+**Example**:
+```cmd
+cls
+```
+This will clear all text from the Command Prompt.
+
+---
+
+## 8. `ifconfig` (or `ipconfig` in Windows)
+**Description**: Displays network configuration details.
+
+**Example**:
+```cmd
+ipconfig
+```
+This will show your IP address, subnet mask, and default gateway.
+
+---
+
+## 9. `ping`
+**Description**: Tests the connection to a specific IP address or domain.
+
+**Example**:
+```cmd
+ping google.com
+```
+This will send packets to `google.com` and display the response time.
+
+---
+
+## 10. `ps`
+**Description**: Displays a list of running processes (similar to `tasklist`).
+
+**Example**:
+```cmd
+tasklist
+```
+This will show all processes currently running on your system.
+
+---
+
+## 11. `kill`
+**Description**: Terminates a running process (similar to `taskkill`).
+
+**Example**:
+```cmd
+taskkill /IM process_name.exe /F
+```
+This will forcefully terminate the process `process_name.exe`.
+
+---
+
+## 12. `uname`
+**Description**: Displays system information (similar to `systeminfo`).
+
+**Example**:
+```cmd
+systeminfo
+```
+This will show details like OS version, system architecture, and more.
+
+---
+
+## 13. `exit`
+**Description**: Closes the Command Prompt.
+
+**Example**:
+```cmd
+exit
+```
+This will close the current Command Prompt session.
+
+---
+
+## 14. `man` (or `help` in Windows)
+**Description**: Displays help for commands.
+
+**Examples**:
+- To see all commands:
+  ```cmd
+  help
+  ```
+- To get help for a specific command:
+  ```cmd
+  help dir
+  ```
+
+---
+
+These commands are essential for navigating and managing files and processes in Windows. Practice them to become more comfortable with the Command Prompt!
+```
