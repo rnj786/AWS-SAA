@@ -1,0 +1,9 @@
+ResourceType,ResourceID
+VPC,vpc-00fb5a701b57eb48c
+InternetGateway,igw-068c1e7b38b3f81bc
+PublicSubnet,subnet-0fb8ba7ae9ce45f78
+PrivateSubnet,subnet-07487a98395d1222a
+PublicRouteTable,rtb-0c26f47e14b6692a6
+PrivateRouteTable,rtb-07a032fd11947bb6a
+NATGateway,nat-04ff05f5e79ce8d71
+ElasticIP,eipalloc-0e6393c99def3913b

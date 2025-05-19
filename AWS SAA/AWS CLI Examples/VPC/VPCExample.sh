@@ -78,12 +78,29 @@ aws ec2 associate-route-table --route-table-id $PRIVATE_RT_ID --subnet-id $PRIVA
 
 echo "VPC setup complete. VPC ID: $VPC_ID"
 
-#export resource IDs for cleanup 
-export VPC_ID=$VPC_ID
-export IGW_ID=$IGW_ID
-export PUBLIC_SUBNET_ID=$PUBLIC_SUBNET_ID
-export PRIVATE_SUBNET_ID=$PRIVATE_SUBNET_ID
-export PUBLIC_RT_ID=$PUBLIC_RT_ID
-export PRIVATE_RT_ID=$PRIVATE_RT_ID
-export NAT_GW_ID=$NAT_GW_ID
-export EIP_ALLOC_ID=$EIP_ALLOC_ID
+echo "VPC_ID: $VPC_ID"
+echo "IGW_ID: $IGW_ID"
+echo "PUBLIC_SUBNET_ID: $PUBLIC_SUBNET_ID"
+echo "PRIVATE_SUBNET_ID: $PRIVATE_SUBNET_ID"
+echo "PUBLIC_RT_ID: $PUBLIC_RT_ID"
+echo "PRIVATE_RT_ID: $PRIVATE_RT_ID"
+echo "NAT_GW_ID: $NAT_GW_ID"
+echo "EIP_ALLOC_ID: $EIP_ALLOC_ID"
+
+echo "Reached export section"
+
+
+
+# Export resource IDs to a CSV file
+CSV_FILE="VPCResources.csv"
+echo "ResourceType,ResourceID" > $CSV_FILE
+echo "VPC,$VPC_ID" >> $CSV_FILE
+echo "InternetGateway,$IGW_ID" >> $CSV_FILE
+echo "PublicSubnet,$PUBLIC_SUBNET_ID" >> $CSV_FILE
+echo "PrivateSubnet,$PRIVATE_SUBNET_ID" >> $CSV_FILE
+echo "PublicRouteTable,$PUBLIC_RT_ID" >> $CSV_FILE
+echo "PrivateRouteTable,$PRIVATE_RT_ID" >> $CSV_FILE
+echo "NATGateway,$NAT_GW_ID" >> $CSV_FILE
+echo "ElasticIP,$EIP_ALLOC_ID" >> $CSV_FILE
+
+echo "Resource IDs have been exported to $CSV_FILE"
