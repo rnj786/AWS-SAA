@@ -106,3 +106,105 @@ resource "aws_route_table_association" "private_rt_assoc" {
   subnet_id      = aws_subnet.private_subnet.id
   route_table_id = aws_route_table.private_rt.id
 }
+
+# Network ACL for Private Subnet - Deny Gaming Ports
+resource "aws_network_acl" "private_nacl" {
+  vpc_id = aws_vpc.main_vpc.id
+
+  subnet_ids = [aws_subnet.private_subnet.id]
+
+  tags = {
+    Name = "${var.vpc_name}-private-nacl"
+  }
+}
+
+# Deny inbound gaming ports (example: 27000-27100 TCP/UDP, 3074 TCP/UDP, 25565 TCP/UDP)
+resource "aws_network_acl_rule" "deny_gaming_tcp" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 100
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 25565
+  to_port        = 25565
+}
+
+resource "aws_network_acl_rule" "deny_gaming_udp" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 110
+  egress         = false
+  protocol       = "udp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 25565
+  to_port        = 25565
+}
+
+resource "aws_network_acl_rule" "deny_gaming_tcp_steam" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 120
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 27000
+  to_port        = 27100
+}
+
+resource "aws_network_acl_rule" "deny_gaming_udp_steam" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 130
+  egress         = false
+  protocol       = "udp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 27000
+  to_port        = 27100
+}
+
+resource "aws_network_acl_rule" "deny_gaming_tcp_xbox" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 140
+  egress         = false
+  protocol       = "tcp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 3074
+  to_port        = 3074
+}
+
+resource "aws_network_acl_rule" "deny_gaming_udp_xbox" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 150
+  egress         = false
+  protocol       = "udp"
+  rule_action    = "deny"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 3074
+  to_port        = 3074
+}
+
+# Allow all other inbound traffic (example: ephemeral ports)
+resource "aws_network_acl_rule" "allow_all_inbound" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 200
+  egress         = false
+  protocol       = "-1"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 0
+  to_port        = 0
+}
+
+# Allow all outbound traffic
+resource "aws_network_acl_rule" "allow_all_outbound" {
+  network_acl_id = aws_network_acl.private_nacl.id
+  rule_number    = 100
+  egress         = true
+  protocol       = "-1"
+  rule_action    = "allow"
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 0
+  to_port        = 0
+}
