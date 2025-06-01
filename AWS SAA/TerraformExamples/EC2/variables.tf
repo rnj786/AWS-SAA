@@ -61,7 +61,7 @@ variable "instance_name" {
 variable "volume_size" {
   description = "Size of the root EBS volume in GiB"
   type        = number
-  default     = 8
+  default     = 30
 }
 
 variable "volume_type" {
@@ -77,7 +77,39 @@ variable "kms_key_id" {
 }
 
 variable "vpc_id" {
-  description = "VPC ID"
+  description = "The VPC ID to launch resources in"
   type        = string
-  default     = "vpc-087ff262493abfb00"
+}
+
+variable "public_subnet_ids" {
+  description = "List of public subnet IDs"
+  type        = list(string)
+}
+
+variable "private_subnet_ids" {
+  description = "List of private subnet IDs"
+  type        = list(string)
+}
+
+variable "additional_ebs_device_name" {
+  description = "Device name for the additional EBS volume (e.g., /dev/xvdb)"
+  type        = string
+  default     = "/dev/xvdb"
+}
+
+variable "additional_ebs_volume_size" {
+  description = "Size of the additional EBS volume in GB"
+  type        = number
+  default     = 10
+}
+
+variable "additional_ebs_volume_type" {
+  description = "Type of the additional EBS volume"
+  type        = string
+  default     = "gp3"
+}
+
+variable "iam_instance_profile" {
+  description = "IAM instance profile for EC2"
+  type        = string
 }
