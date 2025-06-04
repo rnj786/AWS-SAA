@@ -40,3 +40,26 @@ module "ec2" {
   group_policy_arn        = var.group_policy_arn
   account_id              = var.account_id
 }
+
+module "rds" {
+  source              = "./RDS"
+  region              = var.region
+  vpc_id              = module.vpc.vpc_id
+  private_subnet_ids  = module.vpc.private_subnet_ids
+  # ...other variables...
+}
+
+module "s3_bucket" {
+  source                = "./S3"
+  region                = var.region
+  bucket_name           = var.s3_bucket_name
+  force_destroy         = var.s3_force_destroy
+  versioning_enabled    = var.s3_versioning_enabled
+  sse_algorithm         = var.s3_sse_algorithm
+  kms_key_id            = var.s3_kms_key_id
+  block_public_acls     = var.s3_block_public_acls
+  block_public_policy   = var.s3_block_public_policy
+  ignore_public_acls    = var.s3_ignore_public_acls
+  restrict_public_buckets = var.s3_restrict_public_buckets
+  tags                  = var.s3_tags
+}
