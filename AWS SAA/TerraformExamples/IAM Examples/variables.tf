@@ -1,23 +1,29 @@
 variable "region" {
-  description = "AWS region to deploy resources"
+  description = "AWS region"
   type        = string
-  default     = "us-east-1"
 }
 
-variable "role_name" {
-  description = "Name of the IAM role"
+variable "ssm_role_name" {
+  description = "Name for the SSM IAM role"
   type        = string
-  default     = "TFRole"
-}
-
-variable "group_name" {
-  description = "Name of the IAM group"
-  type        = string
-  default     = "EC2TFModerator"
 }
 
 variable "user_name" {
   description = "Name of the IAM user"
   type        = string
-  default     = "TFUser"
+}
+
+variable "group_name" {
+  description = "Name of the IAM group"
+  type        = string
+}
+
+variable "user_policy_arn" {
+  description = "Policy ARN to attach to the IAM user"
+  type        = string
+}
+
+variable "group_policy_arn" {
+  description = "Policy ARN to attach to the IAM group"
+  type        = string
 }

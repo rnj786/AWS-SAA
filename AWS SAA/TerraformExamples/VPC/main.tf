@@ -24,24 +24,26 @@ resource "aws_internet_gateway" "igw" {
 
 # Create Public Subnet
 resource "aws_subnet" "public_subnet" {
+  count                   = 2
   vpc_id                  = aws_vpc.main_vpc.id
-  cidr_block              = var.public_subnet_cidr
+  cidr_block              = var.public_subnet_cidrs[count.index]
   map_public_ip_on_launch = true
-  availability_zone       = var.public_subnet_az
+  availability_zone       = var.public_subnet_azs[count.index]
 
   tags = {
-    Name = "${var.vpc_name}-public-subnet"
+    Name = "${var.vpc_name}-public-subnet-${count.index + 1}"
   }
 }
 
 # Create Private Subnet
 resource "aws_subnet" "private_subnet" {
+  count             = 2
   vpc_id            = aws_vpc.main_vpc.id
-  cidr_block        = var.private_subnet_cidr
-  availability_zone = var.private_subnet_az
+  cidr_block        = var.private_subnet_cidrs[count.index]
+  availability_zone = var.private_subnet_azs[count.index]
 
   tags = {
-    Name = "${var.vpc_name}-private-subnet"
+    Name = "${var.vpc_name}-private-subnet-${count.index + 1}"
   }
 }
 
@@ -61,57 +63,63 @@ resource "aws_route" "public_route" {
   gateway_id             = aws_internet_gateway.igw.id
 }
 
-# Associate Public Route Table with Public Subnet
+# Associate Public Route Table with Public Subnets
 resource "aws_route_table_association" "public_rt_assoc" {
-  subnet_id      = aws_subnet.public_subnet.id
+  count          = 2
+  subnet_id      = aws_subnet.public_subnet[count.index].id
   route_table_id = aws_route_table.public_rt.id
 }
 
-# Create NAT Gateway
+# Create NAT Gateway (one per AZ for HA, or just use the first public subnet for single NAT)
 resource "aws_eip" "nat_eip" {
-  vpc = true
+  count = 2
+  vpc   = true
 
   tags = {
-    Name = "${var.vpc_name}-nat-eip"
+    Name = "${var.vpc_name}-nat-eip-${count.index + 1}"
   }
 }
 
 resource "aws_nat_gateway" "nat_gw" {
-  allocation_id = aws_eip.nat_eip.id
-  subnet_id     = aws_subnet.public_subnet.id
+  count         = 2
+  allocation_id = aws_eip.nat_eip[count.index].id
+  subnet_id     = aws_subnet.public_subnet[count.index].id
 
   tags = {
-    Name = "${var.vpc_name}-nat-gw"
+    Name = "${var.vpc_name}-nat-gw-${count.index + 1}"
   }
 }
 
-# Create Private Route Table
+# Create Private Route Table (one per AZ)
 resource "aws_route_table" "private_rt" {
+  count  = 2
   vpc_id = aws_vpc.main_vpc.id
 
   tags = {
-    Name = "${var.vpc_name}-private-rt"
+    Name = "${var.vpc_name}-private-rt-${count.index + 1}"
   }
 }
 
 # Create Route to NAT Gateway in Private Route Table
 resource "aws_route" "private_route" {
-  route_table_id         = aws_route_table.private_rt.id
+  count                  = 2
+  route_table_id         = aws_route_table.private_rt[count.index].id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.nat_gw.id
+  nat_gateway_id         = aws_nat_gateway.nat_gw[count.index].id
 }
 
-# Associate Private Route Table with Private Subnet
+# Associate Private Route Table with Private Subnets
 resource "aws_route_table_association" "private_rt_assoc" {
-  subnet_id      = aws_subnet.private_subnet.id
-  route_table_id = aws_route_table.private_rt.id
+  count          = 2
+  subnet_id      = aws_subnet.private_subnet[count.index].id
+  route_table_id = aws_route_table.private_rt[count.index].id
 }
 
-# Network ACL for Private Subnet - Deny Gaming Ports
+# Network ACL for Private Subnets
 resource "aws_network_acl" "private_nacl" {
   vpc_id = aws_vpc.main_vpc.id
 
-  subnet_ids = [aws_subnet.private_subnet.id]
+  subnet_ids = aws_subnet.private_subnet[*].id
 
   tags = {
     Name = "${var.vpc_name}-private-nacl"
