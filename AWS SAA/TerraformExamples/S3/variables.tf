@@ -61,3 +61,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "vpc_id" {
+  description = "VPC ID allowed to access the S3 bucket"
+  type        = string
+}

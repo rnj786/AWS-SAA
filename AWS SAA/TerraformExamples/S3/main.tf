@@ -35,3 +35,51 @@ resource "aws_s3_bucket_public_access_block" "this" {
   ignore_public_acls      = var.ignore_public_acls
   restrict_public_buckets = var.restrict_public_buckets
 }
+
+
+resource "aws_vpc_endpoint" "s3_endpoint" {
+  vpc_id       = var.vpc_id
+  service_name = "com.amazonaws.${var.region}.s3"
+  vpc_endpoint_type = "Gateway"
+
+  tags = merge(var.tags, { Name = "${var.bucket_name}-s3-endpoint" })
+}
+
+data "aws_vpc" "selected" {
+  id = var.vpc_id
+}
+
+# Policy to allow access only via the VPC Endpoint (restricts to specific VPC)
+data "aws_iam_policy_document" "bucket_policy" {
+  statement {
+    sid    = "AllowAccessFromVPCE"
+    effect = "Allow"
+
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+      "s3:PutObject",
+      "s3:ListBucket"
+    ]
+
+    resources = [
+      aws_s3_bucket.this.arn,
+      "${aws_s3_bucket.this.arn}/*"
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:sourceVpce"
+      values   = [aws_vpc_endpoint.s3_endpoint.id]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "this" {
+  bucket = aws_s3_bucket.this.id
+  policy = data.aws_iam_policy_document.bucket_policy.json
+}
