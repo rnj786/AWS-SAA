@@ -1,0 +1,27 @@
+
+plugins {
+    id "io.micronaut.application" version "4.0.0"
+    id "io.micronaut.aot" version "4.0.0"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+micronaut {
+    runtime("lambda_java")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.example.*")
+    }
+    aot {
+        optimizeServiceLoading = true
+        convertYamlToJava = true
+        precomputeOperations = true
+    }
+}
+
+dependencies {
+    implementation("io.micronaut.aws:micronaut-function-aws-api-proxy")
+    implementation("software.amazon.awssdk:s3")
+}
+
+mainClassName = "com.example.FileHandler"
