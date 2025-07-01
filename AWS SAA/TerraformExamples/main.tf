@@ -62,4 +62,5 @@ module "s3_bucket" {
   ignore_public_acls    = var.s3_ignore_public_acls
   restrict_public_buckets = var.s3_restrict_public_buckets
   tags                  = var.s3_tags
+  vpc_id                = module.vpc.vpc_id
 }

@@ -1,0 +1,7 @@
+com/example/eventsrsvp/repository/EventsRSVPDynamoDBRepository.class
+com/example/eventsrsvp/config/JacksonConfig.class
+com/example/eventsrsvp/controller/EventsRSVPController.class
+com/example/eventsrsvp/EventsrsvpServiceApplication.class
+com/example/eventsrsvp/model/EventsRSVP.class
+com/example/eventsrsvp/service/EventsRSVPService.class
+com/example/eventsrsvp/repository/EventsRSVPRepository.class

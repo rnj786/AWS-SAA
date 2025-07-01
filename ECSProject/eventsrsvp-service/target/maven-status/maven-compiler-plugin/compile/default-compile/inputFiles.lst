@@ -1,0 +1,7 @@
+/workspaces/codespaces-blank/EKSProject/eventsrsvp-service/src/main/java/com/example/eventsrsvp/EventsrsvpServiceApplication.java
+/workspaces/codespaces-blank/EKSProject/eventsrsvp-service/src/main/java/com/example/eventsrsvp/service/EventsRSVPService.java
+/workspaces/codespaces-blank/EKSProject/eventsrsvp-service/src/main/java/com/example/eventsrsvp/controller/EventsRSVPController.java
+/workspaces/codespaces-blank/EKSProject/eventsrsvp-service/src/main/java/com/example/eventsrsvp/config/JacksonConfig.java
+/workspaces/codespaces-blank/EKSProject/eventsrsvp-service/src/main/java/com/example/eventsrsvp/repository/EventsRSVPDynamoDBRepository.java
+/workspaces/codespaces-blank/EKSProject/eventsrsvp-service/src/main/java/com/example/eventsrsvp/repository/EventsRSVPRepository.java
+/workspaces/codespaces-blank/EKSProject/eventsrsvp-service/src/main/java/com/example/eventsrsvp/model/EventsRSVP.java
