@@ -1,0 +1,20 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: rsvp-karpenter
+spec:
+  requirements:
+    - key: "karpenter.sh/capacity-type"
+      operator: In
+      values: ["spot", "on-demand"]
+  limits:
+    resources:
+      cpu: 3
+  provider:
+    subnetSelector:
+      karpenter.sh/discovery: eks-rsvp-cluster
+    securityGroupSelector:
+      karpenter.sh/discovery: eks-rsvp-cluster
+  ttlSecondsAfterEmpty: 60
+  consolidation:
+    enabled: true
