@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Generate Meal Data",
+            "type": "shell",
+            "command": "python data/generate_meal_data.py",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Terraform Apply Infra",
+            "type": "shell",
+            "command": "cd infra/terraform && terraform init && terraform apply -auto-approve",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
